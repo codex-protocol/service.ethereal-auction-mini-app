@@ -11,6 +11,9 @@ files:
   - source: ./deployment
     destination: /opt/process/deployment
 
+  - source: ./static
+    destination: /opt/process/static
+
   - source: ./node_modules
     destination: /opt/process/node_modules
 
