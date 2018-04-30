@@ -30,5 +30,22 @@
 }
 
 .conversion > img {
+  height: 2em;
   margin-right: .5em;
+}
+
+@media (max-width: 768px) {
+  .conversions-container {
+    flex-wrap: wrap;
+  }
+
+  .conversion {
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .conversion > img {
+    height: 1em;
+    margin-right: .5em;
+  }
 }
