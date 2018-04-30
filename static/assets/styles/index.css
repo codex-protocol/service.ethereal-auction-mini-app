@@ -1,0 +1,34 @@
+.container {
+  background-color: #00b894;
+}
+
+.dollars {
+  flex-grow: 1;
+  display: flex;
+  font-size: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.currency {
+  font-size: .5em;
+  position: relative;
+  margin-left: .25em;
+  color: rgba(255, 255, 255, .5);
+}
+
+.conversions-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+}
+
+.conversion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conversion > img {
+  margin-right: .5em;
+}

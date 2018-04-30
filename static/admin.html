@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Currency Conversion</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <link rel="stylesheet" href="/assets/styles/admin.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="content">
+        <form action="#" name="update-usd-value">
+          <label for="new-usd-value">New USD Value</label>
+          <div class="input-container">
+            <input type="number" id="new-usd-value" name="new-usd-value" min=".01" step=".01">
+            <button>Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/assets/scripts/admin.js"></script>
+  </body>
+</html>

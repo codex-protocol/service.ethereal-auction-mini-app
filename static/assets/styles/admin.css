@@ -1,0 +1,33 @@
+.container {
+  background-color: #d63031;
+}
+
+.content {
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  width: 100%;
+  padding: 0 .5em;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+}
+
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input {
+  flex-grow: 1;
+  font-size: 1rem;
+  margin-right: .5rem;
+}
+
+button {
+  width: 2rem;
+}

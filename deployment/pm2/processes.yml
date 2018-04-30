@@ -1,0 +1,6 @@
+apps:
+  -
+    script: /opt/process/dist/index.js
+    name: currency-conversion
+    exec_mode: cluster
+    instances: max

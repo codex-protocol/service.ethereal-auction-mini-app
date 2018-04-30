@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Currency Conversion</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <link rel="stylesheet" href="/assets/styles/index.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="content hide">
+
+        <div class="dollars">
+          $<span data-bind="usd">0</span>
+          <span class="currency">USD</span>
+        </div>
+
+        <div class="conversions-container">
+
+          <div class="conversion ether">
+            <img src="/assets/images/ether.png">
+            <span data-bind="eth">0</span>
+            <span class="currency">ETH</span>
+          </div>
+
+          <div class="conversion bitcoin">
+            <img src="/assets/images/bitcoin.png">
+            <span data-bind="btc">0</span>
+            <span class="currency">BTC</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/assets/scripts/index.js"></script>
+  </body>
+</html>
