@@ -11,9 +11,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-@media (max-width: 24em) {
+@media (max-width: 1024px) {
+  html,
   body {
-    font-size: 64px;
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 24px;
   }
 }
 
