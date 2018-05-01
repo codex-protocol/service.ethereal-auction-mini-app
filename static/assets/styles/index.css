@@ -1,5 +1,5 @@
 .container {
-  background-color: #00b894;
+  background-color: #32194c;
 }
 
 .dollars {
@@ -11,10 +11,10 @@
 }
 
 .currency {
+  opacity: .75;
   font-size: .5em;
   position: relative;
   margin-left: .25em;
-  color: rgba(255, 255, 255, .5);
 }
 
 .conversions-container {
