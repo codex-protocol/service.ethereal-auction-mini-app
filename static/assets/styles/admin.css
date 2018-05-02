@@ -1,16 +1,11 @@
-.container {
-  background-color: #d63031;
-}
-
 .content {
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 form {
   width: 100%;
-  padding: 0 .5em;
-  box-sizing: border-box;
 }
 
 label {
@@ -24,10 +19,58 @@ label {
 
 input {
   flex-grow: 1;
-  font-size: 1rem;
-  margin-right: .5rem;
+  font-size: 1em;
+  margin-right: 1rem;
 }
 
 button {
-  width: 2rem;
+  width: 20%;
+}
+
+#artwork-thumbnails {
+  width: 100%;
+  overflow-x: scroll;
+
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.artwork-thumbnail {
+  width: 4em;
+  height: 4em;
+  min-width: 4em;
+
+  opacity: .4;
+  padding: .25em;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, .25);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.artwork-thumbnail:not(:last-child) {
+  margin-right: .25em;
+}
+
+.artwork-thumbnail img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.artwork-thumbnail:hover {
+  opacity: .6;
+  cursor: pointer;
+  border-color: #55efc4;
+}
+
+.artwork-thumbnail.active {
+  opacity: 1;
+  border-color: #74b9ff;
 }
