@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 
+import fs from 'fs'
 import http from 'http'
 import io from 'socket.io'
 import express from 'express'
@@ -13,27 +14,36 @@ const app = express()
 const httpApp = http.Server(app)
 const socketApp = io(httpApp)
 
-app.use(express.static(`${__dirname}/../static`))
-
-const currentValues = {
-  usd: 0,
-  eth: 0,
-  btc: 0,
+const state = {
+  conversionRates: {
+    eth: 0,
+    btc: 0,
+  },
+  currencyValues: {
+    usd: 0,
+    eth: 0,
+    btc: 0,
+  },
+  artworkUrls: [],
+  currentArtworkUrl: null,
 }
 
-const conversionRates = {
-  eth: 0,
-  btc: 0,
+const artworkDirectoryPath = `${__dirname}/../static/assets/images/artwork`
+
+fs.readdirSync(artworkDirectoryPath).forEach((artworkFileName, index) => {
+  if (!/^(_|\.)/.test(artworkFileName) && /\.jpg$/.test(artworkFileName)) {
+    state.artworkUrls.push(`/assets/images/artwork/${artworkFileName}`)
+  }
+})
+
+const updateCurrencyConversions = (newUsdValue = state.currencyValues.usd) => {
+  state.currencyValues.usd = Number.parseFloat(newUsdValue)
+  state.currencyValues.eth = Number.parseFloat(newUsdValue / state.conversionRates.eth)
+  state.currencyValues.btc = Number.parseFloat(newUsdValue / state.conversionRates.btc)
+  socketApp.emit('update-state', state)
 }
 
-const updateCurrentValues = (newUsdValue = currentValues.usd) => {
-  currentValues.usd = Number.parseFloat(newUsdValue)
-  currentValues.eth = Number.parseFloat(newUsdValue / conversionRates.eth)
-  currentValues.btc = Number.parseFloat(newUsdValue / conversionRates.btc)
-  socketApp.emit('update-values', currentValues)
-}
-
-const updateConversionRates = (shouldEmit = true) => {
+const updateCurrencyValues = (shouldEmit = true) => {
 
   const promises = {
     eth: requestPromise({
@@ -53,31 +63,43 @@ const updateConversionRates = (shouldEmit = true) => {
 
       const newEthConversionRate = responses.eth[0].price_usd
       const newBtcConversionRate = responses.btc[0].price_usd
-      const oldEthConversionRate = conversionRates.eth
-      const oldBtcConversionRate = conversionRates.btc
+      const oldEthConversionRate = state.conversionRates.eth
+      const oldBtcConversionRate = state.conversionRates.btc
 
-      conversionRates.eth = newEthConversionRate
-      conversionRates.btc = newBtcConversionRate
+      state.conversionRates.eth = newEthConversionRate
+      state.conversionRates.btc = newBtcConversionRate
 
       if (shouldEmit && (newEthConversionRate !== oldEthConversionRate || newBtcConversionRate !== oldBtcConversionRate)) {
-        updateCurrentValues()
+        updateCurrencyConversions()
       }
 
     })
 }
 
-socketApp.on('connection', (socket) => {
-  socket.emit('update-values', currentValues)
-  socket.on('update-usd-value', (newUsdValue) => {
-    updateConversionRates(false)
-    updateCurrentValues(newUsdValue)
-  })
-})
-
-updateConversionRates(false)
+updateCurrencyValues(false)
   .then(() => {
+
+    app.use(express.static(`${__dirname}/../static`))
+
+    socketApp.on('connection', (socket) => {
+
+      socket.emit('update-state', state)
+
+      socket.on('update-usd-value', (newUsdValue) => {
+        updateCurrencyValues(false)
+        updateCurrencyConversions(newUsdValue)
+      })
+
+      socket.on('update-current-artwork-filename', (newArtworkUrl) => {
+        if (state.artworkUrls.includes(newArtworkUrl)) {
+          state.currentArtworkUrl = newArtworkUrl
+          socketApp.emit('update-state', state)
+        }
+      })
+    })
+
     const listener = httpApp.listen(config.process.port, () => {
       logger.info(`server listening on port ${listener.address().port}`)
-      setInterval(updateConversionRates, 60 * 1000)
+      setInterval(updateCurrencyValues, 60 * 1000)
     })
   })

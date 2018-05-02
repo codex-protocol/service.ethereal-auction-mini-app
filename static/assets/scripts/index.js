@@ -1,20 +1,25 @@
 const socket = io()
 
 const $content = document.querySelector('.content')
+const $artwork = document.querySelector('.artwork img')
 
 const $usd = document.querySelector('[data-bind="usd"]')
 const $eth = document.querySelector('[data-bind="eth"]')
 const $btc = document.querySelector('[data-bind="btc"]')
 
-socket.on('update-values', (newValues) => {
+socket.on('update-state', (newState) => {
 
-  if (newValues.usd !== 0) {
+  if (newState.currencyValues.usd === 0) {
+    $content.classList.add('hide')
+  } else {
     $content.classList.remove('hide')
   }
 
-  $usd.innerText = (newValues.usd || 0).toLocaleString()
-  $eth.innerText = (newValues.eth || 0).toFixed(5)
-  $btc.innerText = (newValues.btc || 0).toFixed(5)
+  $artwork.src = newState.currentArtworkUrl || ''
+
+  $usd.innerText = (newState.currencyValues.usd || 0).toLocaleString()
+  $eth.innerText = (newState.currencyValues.eth || 0).toFixed(5)
+  $btc.innerText = (newState.currencyValues.btc || 0).toFixed(5)
 
 })
 
