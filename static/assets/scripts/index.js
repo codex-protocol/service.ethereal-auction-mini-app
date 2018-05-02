@@ -40,3 +40,26 @@ document.body.addEventListener('click', (event) => {
   }
 
 })
+
+document.addEventListener('keydown', (event) => {
+
+  const currentPaddingBottom = Number.parseFloat($content.style.paddingBottom) || 1
+
+  let newPaddingBottom = currentPaddingBottom
+
+  switch (event.code) {
+    case 'ArrowUp':
+      if (currentPaddingBottom + 0.5 < 8) newPaddingBottom = currentPaddingBottom + 0.5
+      break
+
+    case 'ArrowDown':
+      if (currentPaddingBottom - 0.5 > 0) newPaddingBottom = currentPaddingBottom - 0.5
+      break
+
+    default:
+      break
+  }
+
+  $content.style.paddingBottom = `${newPaddingBottom}em`
+
+})
