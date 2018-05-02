@@ -117,9 +117,7 @@ document.addEventListener('keydown', (event) => {
   }
 
   if (nextArtworkUrl) {
-    socket.emit('update-usd-value', 0)
-    setTimeout(() => {
-      setArtworkAndReset(nextArtworkUrl)
-    }, 500)
+    setArtworkAndReset(nextArtworkUrl)
   }
+
 })
