@@ -74,3 +74,24 @@ button {
   opacity: 1;
   border-color: #74b9ff;
 }
+
+.increment-buttons,
+.increment-button-labels {
+  width: 100%;
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.increment-buttons button {
+  height: 4em;
+  overflow-x: hidden;
+}
+
+.increment-button-labels span {
+  flex-grow: 1;
+  font-size: .25em;
+  text-align: center;
+  overflow-x: hidden;
+  color: rgba(255, 255, 255, .25);
+}
