@@ -25,6 +25,15 @@ socket.on('update-state', (newState) => {
 
 document.body.addEventListener('click', (event) => {
 
+  if (event.altKey) {
+    if (document.body.classList.contains('party-mode')) {
+      document.body.classList.remove('party-mode')
+    } else {
+      document.body.classList.add('party-mode')
+    }
+    return
+  }
+
   if (!event.shiftKey) {
     return
   }
