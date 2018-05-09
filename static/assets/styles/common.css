@@ -12,6 +12,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.party-mode {
+  animation: 2s linear 0s infinite party-mode;
+}
+
 @media (max-width: 64rem) {
   body {
     font-size: 3rem;
@@ -45,4 +49,9 @@ body {
 
 .content.hide {
   opacity: 0;
+}
+
+@keyframes party-mode {
+  0% { filter: hue-rotate(0); }
+  100% { filter: hue-rotate(360deg); }
 }
