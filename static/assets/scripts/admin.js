@@ -83,6 +83,10 @@ document.addEventListener('keydown', (event) => {
 
   let nextArtworkUrl = null
 
+  if (event.target === $newUsdValueInput) {
+    return
+  }
+
   switch (event.code) {
     case 'Enter':
       updateUsdValue()
