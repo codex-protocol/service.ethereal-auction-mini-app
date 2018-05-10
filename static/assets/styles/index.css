@@ -35,18 +35,19 @@
 
 .conversion {
   display: flex;
+  font-size: 1.5em;
   margin-bottom: .5em;
   align-items: center;
   justify-content: center;
 }
 
 .conversion > img {
-  height: 1em;
+  height: .8em;
   margin-right: .5em;
 }
 
 .conversion.ether > img {
-  height: 1.2em;
+  height: 1em;
 }
 
 @media (max-width: 768px) {
