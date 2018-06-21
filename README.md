@@ -1,6 +1,10 @@
-# Codex Protocol | Currency Conversion
+# Codex Protocol | Currency Conversion Auction App
 
-Currency Conversion Mini-App for Ethereal
+![](https://i.imgur.com/GQnot2b.jpg)
+
+> Currency conversion mini-app for Codex Protocol's charity auction held at Ethereal Summit 2018
+
+This app displays the artwork & live auction prices for the cryptocurrency-themed artwork auctioned off by Codex Protocol at Ethereal Summit 2018. There is an admin panel that allows you to choose the currently-displayed artwork, as well as it's current USD auction price. These changes are pushed to the viewing clients via [socket.io](https://socket.io/)
 
 # Usage
 1. Install dependencies with `npm install`
